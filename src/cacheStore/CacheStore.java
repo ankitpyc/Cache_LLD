@@ -19,5 +19,4 @@ public class CacheStore<Key extends CacheKey, Value extends CacheValue> {
         this.cacheCapacity = cacheCapacity;
     }
 
-
 }
