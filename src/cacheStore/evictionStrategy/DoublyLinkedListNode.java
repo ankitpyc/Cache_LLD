@@ -3,8 +3,8 @@ package src.cacheStore.evictionStrategy;
 import src.cacheStore.domain.CacheKey;
 import src.cacheStore.domain.CacheValue;
 
-public class DoublyLinkedListNode<Key extends CacheKey, Value extends CacheValue> {
-    DoublyLinkedList next, prev;
+public class DoublyLinkedListNode<Key extends CacheKey> {
+    DoublyLinkedListNode<Key> next, prev;
     Key key;
 
     public DoublyLinkedListNode(Key k) {

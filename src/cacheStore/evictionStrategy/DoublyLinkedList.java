@@ -1,26 +1,41 @@
 package src.cacheStore.evictionStrategy;
 
 import src.cacheStore.domain.CacheKey;
-import src.cacheStore.domain.CacheValue;
-
-import java.security.Key;
 
 
-public class DoublyLinkedList<Key extends CacheKey, Value extends CacheValue> {
+public class DoublyLinkedList<Key extends CacheKey> {
 
-    DoublyLinkedListNode<Key, Value> head, tail;
+    DoublyLinkedListNode<Key> head, tail;
     CacheEvictionStrategy cacheEvictionStrategy;
-    int capacity;
 
-    public DoublyLinkedList(Key k, int capacity) {
+    public DoublyLinkedList(int capacity) {
         this.head = null;
         this.tail = null;
-        this.capacity = capacity;
     }
 
-    public void addNodeToList(Key k) {
-        if (cacheEvictionStrategy instanceof LeastFrequentlyUsed) {
+    //TODO:Add implementation
+    public DoublyLinkedListNode addNodeToList(Key k) {
+        return null;
+    }
 
+    public DoublyLinkedListNode removeNode(DoublyLinkedListNode node) {
+        node.prev.next = null;
+        node.next = null;
+        node.prev = null;
+        return node;
+    }
+
+    private void referKey(DoublyLinkedListNode<Key> node) {
+        DoublyLinkedListNode temp = null;
+        //Remove if node is a tail ref
+        if (tail == node && tail.prev != null) {
+            temp = node.prev;
+            node.prev = null;
+            tail = temp;
         }
+        //Transfer the node to most referenced to head
+        node.prev = head;
+        head.next = node;
+        head = node;
     }
 }
