@@ -25,7 +25,7 @@ public class DoublyLinkedList<Key extends CacheKey> {
         return node;
     }
 
-    private void referKey(DoublyLinkedListNode<Key> node) {
+    public void referKey(DoublyLinkedListNode<Key> node) {
         DoublyLinkedListNode temp = null;
         //Remove if node is a tail ref
         if (tail == node && tail.prev != null) {

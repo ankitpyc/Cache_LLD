@@ -1,7 +1,14 @@
 package src.cacheStore.evictionStrategy;
 
-public interface CacheEvictionStrategy {
-  public void evict(DoublyLinkedList list);
+import src.cacheStore.CacheStore;
+import src.cacheStore.domain.CacheKey;
 
-  void evict();
+import java.util.concurrent.ConcurrentHashMap;
+
+public interface CacheEvictionStrategy<Key extends CacheKey> {
+
+
+    void evict();
+
+    Key evict(DoublyLinkedList<Key> list, ConcurrentHashMap<Key, DoublyLinkedListNode<Key>> cacheStorage);
 }

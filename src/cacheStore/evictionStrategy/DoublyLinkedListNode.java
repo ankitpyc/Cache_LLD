@@ -1,7 +1,6 @@
 package src.cacheStore.evictionStrategy;
 
 import src.cacheStore.domain.CacheKey;
-import src.cacheStore.domain.CacheValue;
 
 public class DoublyLinkedListNode<Key extends CacheKey> {
     DoublyLinkedListNode<Key> next, prev;

@@ -5,45 +5,55 @@ import src.cacheStore.evictionStrategy.CacheEvictionStrategy;
 import src.cacheStore.evictionStrategy.DoublyLinkedList;
 import src.cacheStore.evictionStrategy.DoublyLinkedListNode;
 import src.cacheStore.exceptions.DuplicateKeyExceptions;
+import src.cacheStore.exceptions.KeyNotExistExceptions;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+/**
+ * This is the cache Store
+ */
 
 public class CacheStore<Key extends CacheKey> {
-    Map<Key, DoublyLinkedListNode<Key>> cacheStore;
+    ConcurrentHashMap<Key, DoublyLinkedListNode<Key>> cacheStorage;
     CacheEvictionStrategy cacheEvictionStrategy;
-
     DoublyLinkedList<Key> list;
 
     int cacheCapacity = 5;
 
     public CacheStore(CacheEvictionStrategy evictionStrategy, int cacheCapacity) {
-        this.cacheStore = new HashMap<Key, DoublyLinkedListNode<Key>>();
+        this.cacheStorage = new ConcurrentHashMap<Key, DoublyLinkedListNode<Key>>();
         this.cacheEvictionStrategy = evictionStrategy;
         this.cacheCapacity = cacheCapacity;
         this.list = new DoublyLinkedList<Key>(cacheCapacity);
     }
 
     public Boolean putKey(Key key) {
-        //TODO:Add implement for inserting key
-        if (!cacheStore.containsKey(key)) {
-            if (cacheCapacity == cacheStore.size()) {
-                cacheEvictionStrategy.evict(list);
-                cacheStore.remove(key);
+        if (!cacheStorage.containsKey(key)) {
+            if (cacheCapacity == cacheStorage.size()) {
+                evictKey(key);
             }
             DoublyLinkedListNode newNode = list.addNodeToList(key);
-            cacheStore.put(key, newNode);
+            cacheStorage.put(key, newNode);
         }
         throw new DuplicateKeyExceptions("The Key Already exsists in the cache");
     }
 
 
-    public Key getKey(Key key) {
-        //TODO:Add implement for inserting key
-        if (!cacheStore.containsKey(key)) {
-
+    /**
+     * This is the cache Store
+     */
+    public Boolean getKey(Key key) {
+        if (!cacheStorage.containsKey(key)) {
+            throw new KeyNotExistExceptions("The Key Already Exsist in the cache");
         }
-        throw new DuplicateKeyExceptions("The Key Already Exsist in the cache");
+        DoublyLinkedListNode node = cacheStorage.get(key);
+        list.referKey(node);
+        return cacheStorage.containsKey(key);
+    }
+
+    private void evictKey(Key key) {
+        cacheEvictionStrategy.evict(list, cacheStorage);
+        cacheStorage.remove(key);
     }
 
 }
