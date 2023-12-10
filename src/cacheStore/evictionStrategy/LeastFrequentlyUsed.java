@@ -1,9 +1,7 @@
 package src.cacheStore.evictionStrategy;
 
-import src.cacheStore.CacheStore;
 import src.cacheStore.domain.CacheKey;
 
-import java.security.Key;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -11,7 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class LeastFrequentlyUsed implements CacheEvictionStrategy {
 
-    @Override
     public void evict() {
 
     }
@@ -19,11 +16,29 @@ public class LeastFrequentlyUsed implements CacheEvictionStrategy {
     /**
      * @param list
      * @param cacheStorage
+     * @param
      * @return
      */
-    @Override
-    public CacheKey evict(DoublyLinkedList list, ConcurrentHashMap cacheStorage) {
-        return null;
+    public CacheKey evict(DoublyLinkedList list, ConcurrentHashMap cacheStorage, CacheKey key) {
+        LFUDoublyLLNode headNode = (LFUDoublyLLNode) list.head;
+        if (headNode != null && headNode.nodeList != null) {
+            //TODO:Add impl
+        }
+        return key;
+    }
+
+    private void removeNodeFromCache(DoublyLinkedList list, LRUDoublyLLNode node) {
+        DLLNode prevNode, nextNode;
+        prevNode = node.prev;
+        nextNode = node.next;
+
+        if (prevNode != null) {
+            prevNode.next = nextNode;
+        }
+        if (nextNode != null) {
+            nextNode.prev = prevNode;
+        }
+        node = null;
     }
 
 }

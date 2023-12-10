@@ -5,7 +5,7 @@ import src.cacheStore.domain.CacheKey;
 
 public class DoublyLinkedList<Key extends CacheKey> {
 
-    DoublyLinkedListNode<Key> head, tail;
+    DLLNode<Key> head, tail;
     CacheEvictionStrategy cacheEvictionStrategy;
 
     public DoublyLinkedList(int capacity) {
@@ -14,19 +14,19 @@ public class DoublyLinkedList<Key extends CacheKey> {
     }
 
     //TODO:Add implementation
-    public DoublyLinkedListNode addNodeToList(Key k) {
+    public LRUDoublyLLNode addNodeToList(Key k) {
         return null;
     }
 
-    public DoublyLinkedListNode removeNode(DoublyLinkedListNode node) {
+    public LRUDoublyLLNode removeNode(LRUDoublyLLNode node) {
         node.prev.next = null;
         node.next = null;
         node.prev = null;
         return node;
     }
 
-    public void referKey(DoublyLinkedListNode<Key> node) {
-        DoublyLinkedListNode temp = null;
+    public void referKey(DLLNode<Key> node) {
+        DLLNode temp = null;
         //Remove if node is a tail ref
         if (tail == node && tail.prev != null) {
             temp = node.prev;
