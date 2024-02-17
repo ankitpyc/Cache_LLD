@@ -7,7 +7,19 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <groupId>com.application.cache</groupId>
     <artifactId>CacheApplication</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <packaging>jar</packaging>
 
     <name>Maven Quick Start Archetype</name>
@@ -47,8 +59,6 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <version>1.18.26</version>
             <scope>provided</scope>
         </dependency>
-
-
     </dependencies>
 
 </project>

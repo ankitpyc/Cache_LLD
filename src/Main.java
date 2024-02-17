@@ -1,16 +1,14 @@
 package src;
 
-import src.cacheStore.CacheStore;
-import src.cacheStore.domain.CacheKey;
-import src.cacheStore.domain.StringCacheKey;
-import src.cacheStore.evictionStrategy.LeastRecentlyUsed;
+import src.cacheStore.CacheFactory.CacheFactory;
+import src.cacheStore.domain.Cache;
+import src.cacheStore.domain.CacheType;
 
 public class Main {
     public static void main(String[] args) {
-        StringCacheKey cacheKey = new StringCacheKey();
-        cacheKey.c = "";
-        System.out.println("Cache Application Started");
-        CacheStore cacheStore = new CacheStore(new LeastRecentlyUsed(), 3);
+        CacheFactory<Integer,String> cacheFactory = new CacheFactory<>();
+        Cache cache = cacheFactory.getCache(CacheType.LFU,5);
+        cache.put(1,"ANKIT");
     }
 
 }
