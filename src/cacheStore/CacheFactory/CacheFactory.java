@@ -3,6 +3,7 @@ package src.cacheStore.CacheFactory;
 
 import src.cacheStore.LFUCache;
 import src.cacheStore.LRUCache;
+import src.cacheStore.TTLCache;
 import src.cacheStore.domain.Cache;
 import src.cacheStore.domain.CacheType;
 
@@ -14,6 +15,8 @@ public class CacheFactory<K,V> {
                  return new LRUCache<K,V>(capacity);
             case LRU:
                 return new LFUCache<K,V>(capacity);
+            case TTL:
+                return new TTLCache<K,V>();
             default:
                 throw new RuntimeException();
         }
