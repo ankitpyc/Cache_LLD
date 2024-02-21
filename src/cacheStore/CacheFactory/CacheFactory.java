@@ -7,9 +7,9 @@ import src.cacheStore.TTLCache;
 import src.cacheStore.domain.Cache;
 import src.cacheStore.domain.CacheType;
 
-public class CacheFactory<K,V> {
+public class CacheFactory {
 
-    public Cache getCache(CacheType cacheType, int capacity){
+    public static  <K,V> Cache<K,V>  getCache(CacheType cacheType, int capacity){
         switch (cacheType){
             case LFU:
                  return new LRUCache<K,V>(capacity);

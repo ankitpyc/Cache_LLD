@@ -1,6 +1,8 @@
 package src.cacheStore.domain.LLNode;
 
-public class CacheNode<K,V> {
+import java.util.Observable;
+
+public class CacheNode<K,V> extends Observable {
 
     public K key;
 

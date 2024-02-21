@@ -6,9 +6,7 @@ import src.cacheStore.domain.CacheType;
 
 public class Main {
     public static void main(String[] args) {
-        CacheFactory<Integer,String> cacheFactory = new CacheFactory<>();
-        Cache cache = cacheFactory.getCache(CacheType.LFU,5);
+        Cache cache = CacheFactory.getCache(CacheType.LFU,5);
         cache.put(1,"ANKIT");
     }
-
 }
